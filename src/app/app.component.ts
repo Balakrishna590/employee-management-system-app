@@ -13,5 +13,5 @@ import { LoginComponent } from './auth/components/login/login.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'employee-management-system';
+  title = 'employee-management-system-app';
 }

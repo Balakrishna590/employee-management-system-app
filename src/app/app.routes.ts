@@ -8,20 +8,22 @@ export const routes: Routes = [
       canActivate: [AuthGuard, RoleGuard],
       data: { roles: ['ADMIN'] },
       loadChildren: () =>
-        import('./modules/admin/admin.module').then(m => m.AdminModule)
+        import('./features/admin/admin.routes')
+          .then(m => m.ADMIN_ROUTES)
     },
     {
       path: 'hr',
-      canActivate: [AuthGuard, RoleGuard],
-      data: { roles: ['HR','ADMIN'] },
+      canActivate: [authGuard, roleGuard],
+      data: { roles: ['HR', 'ADMIN'] },
       loadChildren: () =>
-        import('./modules/hr/hr.module').then(m => m.HrModule)
+        import('./features/hr/hr.routes')
+          .then(m => m.HR_ROUTES)
     },
     {
       path: 'employee',
-      canActivate: [AuthGuard],
+      canActivate: [authGuard],
       loadChildren: () =>
-        import('./modules/employee/employee.module').then(m => m.EmployeeModule)
+        import('./features/employee/employee.routes')
+          .then(m => m.EMPLOYEE_ROUTES)
     }
   ];
-  
