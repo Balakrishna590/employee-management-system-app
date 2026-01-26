@@ -1,16 +1,16 @@
 <div class='d-flex justify-content-center align-items-center vh-100 loginPage'>
     <div class='p-3 rounded w-25 border loginForm'>
         <h2>Login Page</h2>
-        <form onSubmit=formSubmit>
+        <form [formGroup]="loginForm" (ngSubmit)="submit()">
             <div class='mb-3'>
-                <label htmlFor="email"><strong>Email:</strong></label>
-                <input type="email" name='email' placeholder='Enter Email' class='form-control rounded-0'/>
+                <label htmlFor="email"><strong>User Name / Email:</strong></label>
+                <input type="email" name='email' formControlName="username" placeholder='Enter Email' class='form-control rounded-0'/>
             </div>
             <div class='mb-3'> 
                 <label htmlFor="password"><strong>Password:</strong></label>
-                <input type="password" name='password' placeholder='Enter Password' class='form-control rounded-0'/>
+                <input type="password" name='password' formControlName="password"  placeholder='Enter Password' class='form-control rounded-0'/>
             </div>
-            <button class='btn btn-success w-100 rounded-0 mb-2' (click)="loginSubmit()">Log in</button>
+            <button type="submit" class='btn btn-success w-100 rounded-0 mb-2'>Log in</button>
             <div class='mb-1'> 
                 <input type="checkbox" name="tick" id="tick" class='me-2'/>
                 <label htmlFor="password">You are Agree with terms & conditions</label>

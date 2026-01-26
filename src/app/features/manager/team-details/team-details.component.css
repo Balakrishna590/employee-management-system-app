@@ -1,0 +1,71 @@
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.card-header h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.count {
+  background: #ef4444;
+  color: #fff;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  text-align: left;
+  font-size: 14px;
+  color: #6b7280;
+  padding-bottom: 12px;
+}
+
+tbody tr {
+  border-top: 1px solid #f1f1f1;
+}
+
+td {
+  padding: 14px 0;
+  font-size: 14px;
+  color: #374151;
+}
+
+.employee {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.employee img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.status.pending {
+  background: #fff1e6;
+  color: #ff6b00;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.icon-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid #d1d5db;
+  background: transparent;
+  cursor: pointer;
+}
