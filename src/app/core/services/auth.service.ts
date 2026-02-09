@@ -26,7 +26,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return true;//!!localStorage.getItem(this.TOKEN_KEY);
+    return !!localStorage.getItem(this.TOKEN_KEY);
   }
 
   logout(): void {
