@@ -1,86 +1,77 @@
-import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
-import { RouterLink, RouterLinkActive } from "@angular/router";
-
-interface MenuSection {
-  title: string;
-  items: MenuItem[];
-}
-
-interface MenuItem { 
-  label: string; 
-  icon?: string; 
-  route?: string; 
-  children?: MenuItem[]; 
-  expanded?: boolean; 
-}
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../../core/services/auth.service';
+import { ROLE_MENU_CONFIG, ROLE_PRIORITY } from '../../configs/role-menu.config';
+import { AppRole, MenuItem, MenuSection } from '../../models/role.model';
+import { SessionService } from '../../services/session.service';
 
 @Component({
   selector: 'app-side-bar',
   standalone: true,
   imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.css'],
+  styleUrls: ['./side-bar.component.css']
 })
-export class SideBarComponent {
-
+export class SideBarComponent implements OnInit {
   user = {
-    name: 'Bala R',
-    org: 'cvghj'
+    name: 'User',
+    org: 'Employee Management'
   };
 
-  sections: MenuSection[] = [
-    {
-      title: 'You',
-      items: [
-        { label: 'Dashboard', icon: 'assets/Images/dashboard.a3a7efb4.svg', route: '/dashboard' },
-        { label: 'Requests', icon: 'assets/Images/request.ede18172.svg', route: '/requests' },
-        { label: 'Calendar', icon: 'assets/Images/calendar.7310385c.svg', route: '/calendar' }
-      ]
-    },
-    {
-      title: 'Your Apps',
-      items: [
-        { label: 'Timer', icon: 'assets/Images/timer.fa8226e5.svg', route: '/timer' },
-        { label: 'Invoice', icon: 'assets/Images/invoice.6fc3f7a1.svg', route: '/invoice' },
-        { label: 'Payroll', icon: 'assets/Images/payroll.e0906a1e.svg', route: '/payroll' },
-        { label: 'Applicant Tracking', icon: 'assets/Images/ats.4d16b22d.svg', route: '/ats'},
-        { label: 'Survey', icon: 'assets/Images/survey.48e2bd61.svg', route: '/survey' }
-      ]
-    },
-    {
-      title: 'Your Company',
-      items: [
-        { label: 'Employees', icon: 'assets/Images/employee.8b34e3c3.svg', route: '/employees' },
-        { label: 'Projects', icon: 'assets/Images/project.3aa8ddd9.svg', route: '/projects' },
-        { label: 'Clients', icon: 'assets/Images/client.4e37c6b7.svg', route: '/clients' },
-        { label: 'Events', icon: 'assets/Images/event.2db36a8b.svg', route: '/events' },
-        {
-          label: 'Reports',
-          icon: 'assets/Images/report.19c9f47f.svg',
-          expanded: true,
-          children: [
-            { label: 'Work', route: '/reports/work' },
-            { label: 'Attendance', route: '/reports/attendance' }
-          ]
-        },
-        {
-          label: 'Settings',
-          icon: 'assets/Images/setting.754f5107.svg',
-          expanded: true,
-          children: [
-            { label: 'General', route: '/settings/general' },
-            { label: 'Time Off', route: '/settings/time-off' },
-            { label: 'Biometrics', route: '/settings/biometrics' },
-            { label: 'Custom Fields', route: '/settings/custom-fields' },
-            { label: 'Payroll', route: '/settings/payroll' }
-          ]
-        }
-      ]
-    }
-  ];
+  sections: MenuSection[] = [];
 
-  toggle(item: MenuItem) {
+  constructor(
+    private sessionService: SessionService,
+    private authService: AuthService,
+    @Inject(PLATFORM_ID) private platformId: object
+  ) {}
+
+  ngOnInit(): void {
+    const role = this.resolveRole();
+    this.sections = this.cloneSections(ROLE_MENU_CONFIG[role]);
+    this.user.name = this.resolveUserName();
+  }
+
+  toggle(item: MenuItem): void {
     item.expanded = !item.expanded;
+  }
+
+  private resolveRole(): AppRole {
+    const rolesFromSession = this.sessionService.roles as string[];
+    const rolesFromToken = this.authService.getRoles();
+    const allRoles = [...rolesFromSession, ...rolesFromToken];
+
+    for (const role of ROLE_PRIORITY) {
+      if (allRoles.includes(role)) {
+        return role;
+      }
+    }
+
+    return 'EMPLOYEE';
+  }
+
+  private cloneSections(sections: MenuSection[]): MenuSection[] {
+    return sections.map(section => ({
+      ...section,
+      items: section.items.map(item => ({
+        ...item,
+        children: item.children ? item.children.map(child => ({ ...child })) : undefined
+      }))
+    }));
+  }
+
+  private resolveUserName(): string {
+    if (!isPlatformBrowser(this.platformId)) return 'User';
+
+    const token = localStorage.getItem('token');
+    if (!token) return 'User';
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.username || payload.sub || 'User';
+    } catch {
+      return 'User';
+    }
   }
 }

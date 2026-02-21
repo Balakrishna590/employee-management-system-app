@@ -1,0 +1,38 @@
+﻿flowchart TD
+  %% Clear UML-like activity diagram with swimlanes
+  classDef startend fill:#111111,color:#ffffff,stroke:#111111,stroke-width:1.5px;
+  classDef action fill:#eef5ff,stroke:#2f5fa7,color:#10233f,stroke-width:1px;
+  classDef decision fill:#fff3dc,stroke:#a66a00,color:#5a3a00,stroke-width:1.2px;
+  classDef component fill:#edf8ef,stroke:#2f7a3b,color:#16381c,stroke-width:1px;
+
+  subgraph U[User]
+    U0((Start)):::startend
+    U1[Open Application]:::action
+    U2[Enter Username and Password]:::action
+    U3[Click Login]:::action
+    U4{Credentials Valid?}:::decision
+    U5[See Error Message]:::action
+    U6[Select Menu Option]:::action
+    U7[Use Feature Page]:::action
+    U8[Click Logout]:::action
+    U9((End)):::startend
+  end
+
+  subgraph S[System Components]
+    S1[AppComponent Loads]:::component
+    S2[LoginComponent Validates Form]:::component
+    S3[AuthDataService Calls API]:::component
+    S4[/Auth API/]:::component
+    S5[Store Token and Roles]:::component
+    S6[Router Navigation]:::component
+    S7[AuthGuard Check]:::component
+    S8[RoleGuard Check]:::component
+    S9[Load Role Dashboard]:::component
+    S10[Open Selected Component]:::component
+    S11[AuthService.logout Clears Token]:::component
+  end
+
+  U0 --> U1 --> S1 --> U2 --> U3 --> S2 --> S3 --> S4 --> S3 --> U4
+
+  U4 -- No --> U5 --> S2
+  U4 -- Yes --> S5 --> S6 --> S7 --> S8 --> S9 --> U6 --> S10 --> U7 --> U8 --> S11 --> U9

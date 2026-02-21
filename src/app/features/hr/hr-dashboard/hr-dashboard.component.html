@@ -1,1 +1,43 @@
-<p>hr-dashboard works!</p>
+<div class="dashboard">
+  <section class="stats-grid">
+    <div class="stat-card" *ngFor="let stat of stats">
+      <p>{{ stat.label }}</p>
+      <h2>{{ stat.value }}</h2>
+    </div>
+  </section>
+
+  <section class="card mt">
+    <h2>Associated Employees</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Employee ID</th>
+          <th>Name</th>
+          <th>Phone Number</th>
+          <th>Sex</th>
+          <th>Department</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of associatedEmployees">
+          <td>{{ employee?.employeeId }}</td>
+          <td>{{ employee?.firstName }} - {{ employee?.lastName }}</td>
+          <td>{{ employee?.phoneNumber }}</td>
+          <td>{{ employee?.sex }}</td>
+          <td>{{ employee?.departmentName }}</td>
+          <td>{{ employee?.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="grid two-col mt">
+    <app-calendar-shared title="HR Calendar"></app-calendar-shared>
+    <app-payroll-shared title="My Payroll"></app-payroll-shared>
+  </section>
+
+  <section class="mt">
+    <app-survey-shared title="HR Survey"></app-survey-shared>
+  </section>
+</div>

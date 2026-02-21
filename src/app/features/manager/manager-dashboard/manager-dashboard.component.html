@@ -1,13 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+<div class="dashboard">
+  <section class="grid two-col">
+    <div class="card">
+      <h2>Team Members</h2>
+      <div class="row" *ngFor="let member of teamMembers">
+        <div>
+          <strong>{{ member.name }}</strong>
+          <p>{{ member.role }}</p>
+        </div>
+        <span [class.on-leave]="member.status === 'On Leave'">{{ member.status }}</span>
+      </div>
+    </div>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Manager DashBoard</title>
-</head>
+    <div class="card">
+      <h2>Leave Approvals</h2>
+      <div class="leave-row" *ngFor="let leave of leaveApprovals">
+        <strong>{{ leave.employee }}</strong>
+        <p>{{ leave.from }} to {{ leave.to }} • {{ leave.reason }}</p>
+        <div class="actions">
+          <button type="button">Approve</button>
+          <button type="button" class="reject">Reject</button>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<body>
-    <manager-team-details></manager-team-details>
-</body>
+  <section class="grid two-col mt">
+    <app-calendar-shared title="Team Calendar"></app-calendar-shared>
+    <app-payroll-shared title="My Payroll"></app-payroll-shared>
+  </section>
 
-</html>
+  <section class="mt">
+    <app-survey-shared title="Manager Survey"></app-survey-shared>
+  </section>
+</div>

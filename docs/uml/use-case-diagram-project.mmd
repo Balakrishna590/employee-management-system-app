@@ -1,0 +1,61 @@
+﻿flowchart LR
+  %% Use-case style diagram (Mermaid)
+  classDef actor fill:#ffffff,stroke:#333,color:#111,stroke-width:1px;
+  classDef usecase fill:#eef5ff,stroke:#2f5fa7,color:#0f2342,stroke-width:1px;
+  classDef boundary fill:#f8fafc,stroke:#666,stroke-width:1px;
+
+  A[Admin]:::actor
+  H[HR]:::actor
+  M[Manager]:::actor
+  E[Employee]:::actor
+
+  subgraph EMS[Employee Management System]
+    direction TB
+    UC1([Login]):::usecase
+    UC2([View Dashboard]):::usecase
+    UC3([Manage Employee Records]):::usecase
+    UC4([View/Update Payroll]):::usecase
+    UC5([View Calendar]):::usecase
+    UC6([Participate in Survey]):::usecase
+    UC7([Approve Leave Requests]):::usecase
+    UC8([Manage Team Tasks]):::usecase
+    UC9([View/Update Personal Details]):::usecase
+    UC10([Update Settings]):::usecase
+    UC11([View Associated Employees]):::usecase
+  end
+
+  class EMS boundary
+
+  A --> UC1
+  A --> UC2
+  A --> UC3
+  A --> UC4
+  A --> UC5
+  A --> UC6
+  A --> UC10
+
+  H --> UC1
+  H --> UC2
+  H --> UC4
+  H --> UC5
+  H --> UC6
+  H --> UC7
+  H --> UC10
+  H --> UC11
+
+  M --> UC1
+  M --> UC2
+  M --> UC4
+  M --> UC5
+  M --> UC6
+  M --> UC7
+  M --> UC8
+  M --> UC10
+
+  E --> UC1
+  E --> UC2
+  E --> UC4
+  E --> UC5
+  E --> UC6
+  E --> UC9
+  E --> UC10

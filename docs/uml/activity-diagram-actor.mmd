@@ -1,0 +1,44 @@
+﻿flowchart TD
+  classDef actor fill:#ffffff,stroke:#222,color:#111,stroke-width:1.5px;
+  classDef action fill:#eef5ff,stroke:#2f5fa7,color:#10233f,stroke-width:1px;
+  classDef decision fill:#fff3dc,stroke:#a66a00,color:#5a3a00,stroke-width:1.2px;
+  classDef system fill:#edf8ef,stroke:#2f7a3b,color:#16381c,stroke-width:1px;
+  classDef startend fill:#111111,color:#ffffff,stroke:#111111,stroke-width:1.5px;
+
+  ACTOR["<<actor>>\nUser"]:::actor
+
+  subgraph ACT[Activity Flow]
+    S((Start)):::startend
+    U1[Enter Credentials]:::action
+    U2[Click Login]:::action
+    SYS1[LoginComponent Validates Form]:::system
+    D1{Form Valid?}:::decision
+    SYS2[AuthDataService Calls /auth/login]:::system
+    D2{Authentication Success?}:::decision
+    U3[View Error Message]:::action
+    SYS3[Store Token and Roles]:::system
+    D3{Role?}:::decision
+    SYS4[Route to Admin Dashboard]:::system
+    SYS5[Route to HR Dashboard]:::system
+    SYS6[Route to Manager Dashboard]:::system
+    SYS7[Route to Employee Dashboard]:::system
+    U4[Use Features]:::action
+    U5[Click Logout]:::action
+    SYS8[AuthService Clears Token]:::system
+    E((End)):::startend
+  end
+
+  ACTOR --> S
+  S --> U1 --> U2 --> SYS1 --> D1
+  D1 -- No --> U3 --> U1
+  D1 -- Yes --> SYS2 --> D2
+  D2 -- No --> U3
+  D2 -- Yes --> SYS3 --> D3
+
+  D3 -- ADMIN --> SYS4 --> U4
+  D3 -- HR --> SYS5 --> U4
+  D3 -- MANAGER --> SYS6 --> U4
+  D3 -- EMPLOYEE --> SYS7 --> U4
+
+  U4 --> U5 --> SYS8 --> E
+  E --> ACTOR

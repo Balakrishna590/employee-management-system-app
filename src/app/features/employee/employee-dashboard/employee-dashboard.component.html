@@ -1,1 +1,36 @@
-<p>employee-dashboard works!</p>
+<div class="dashboard">
+  <section class="card details-card">
+    <h2>Employee Details</h2>
+    <dl>
+      <div><dt>Employee ID</dt><dd>{{ employee.employeeId }}</dd></div>
+      <div><dt>Name</dt><dd>{{ employee.name }}</dd></div>
+      <div><dt>Designation</dt><dd>{{ employee.designation }}</dd></div>
+      <div><dt>Department</dt><dd>{{ employee.department }}</dd></div>
+      <div><dt>Email</dt><dd>{{ employee.email }}</dd></div>
+      <div><dt>Phone</dt><dd>{{ employee.phone }}</dd></div>
+      <div><dt>Manager</dt><dd>{{ employee.manager }}</dd></div>
+      <div><dt>Joining Date</dt><dd>{{ employee.joiningDate }}</dd></div>
+    </dl>
+  </section>
+
+  <section class="grid two-col">
+    <app-calendar-shared title="My Calendar"></app-calendar-shared>
+    <app-payroll-shared title="My Payroll"></app-payroll-shared>
+  </section>
+
+  <section class="grid two-col">
+    <app-survey-shared title="Employee Survey"></app-survey-shared>
+
+    <div class="card">
+      <h3>Tasks</h3>
+      <ul>
+        <li *ngFor="let task of tasks">{{ task }}</li>
+      </ul>
+
+      <h3 class="mt">Settings</h3>
+      <ul>
+        <li *ngFor="let item of settings">{{ item }}</li>
+      </ul>
+    </div>
+  </section>
+</div>

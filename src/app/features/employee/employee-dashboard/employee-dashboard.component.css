@@ -1,0 +1,55 @@
+.dashboard {
+  padding: 24px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.details-card h2 {
+  margin-top: 0;
+}
+
+dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(240px, 1fr));
+  gap: 10px 16px;
+}
+
+div dt {
+  font-size: 12px;
+  color: #64748b;
+}
+
+div dd {
+  margin: 2px 0 0;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.two-col {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+.mt {
+  margin-top: 20px;
+}

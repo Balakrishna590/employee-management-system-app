@@ -1,6 +1,4 @@
 <aside class="sidebar">
-
-  <!-- USER INFO (FIXED) -->
   <div class="user-box">
     <div class="avatar">{{ user.name.charAt(0) }}</div>
     <div>
@@ -9,50 +7,40 @@
     </div>
   </div>
 
-  <!-- SCROLLABLE AREA -->
   <div class="sidebar-scroll">
-
-    <!-- DYNAMIC SECTIONS -->
     <div class="section" *ngFor="let section of sections">
-
-      <div class="section-title">
-        {{ section.title }}
-      </div>
+      <div class="section-title">{{ section.title }}</div>
 
       <ul class="menu">
         <li *ngFor="let item of section.items">
-
-          <!-- NORMAL ITEM -->
-          <div class="menu-item"
-               *ngIf="!item.children"
-               [routerLink]="item.route"
-               routerLinkActive="active">
-            <img *ngIf="item.icon" [src]="item.icon" class="icon" alt="{{ item.label }}" />
+          <a
+            *ngIf="!item.children"
+            class="menu-item"
+            [routerLink]="item.route"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
             <span class="label">{{ item.label }}</span>
+          </a>
+
+          <div *ngIf="item.children" class="menu-item" (click)="toggle(item)">
+            <span class="label">{{ item.label }}</span>
+            <span class="arrow" [class.open]="item.expanded">^</span>
           </div>
 
-          <!-- COLLAPSIBLE ITEM -->
-          <div class="menu-item"
-               *ngIf="item.children"
-               (click)="toggle(item)">
-            <img *ngIf="item.icon" [src]="item.icon" class="icon" alt="{{ item.label }}" />
-            <span class="label">{{ item.label }}</span>
-          </div>
-
-          <!-- SUB MENU -->
           <ul class="submenu" *ngIf="item.children && item.expanded">
-            <li *ngFor="let child of item.children"
+            <li *ngFor="let child of item.children">
+              <a
                 [routerLink]="child.route"
-                routerLinkActive="active">
-              {{ child.label }}
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                {{ child.label }}
+              </a>
             </li>
           </ul>
-
         </li>
       </ul>
-
     </div>
-
   </div>
-
 </aside>

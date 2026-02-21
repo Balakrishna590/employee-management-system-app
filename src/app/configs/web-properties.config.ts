@@ -7,3 +7,7 @@ export const userRegistrationUrl = webServiceBaseUrl + "/auth/register";
 
 export const fetchAllManagerEmployeesUrl = webServiceBaseUrl + "/common/getAllManagerEmployees"
 
+export const fetchAllAssociatedEmployeesUrl = webServiceBaseUrl + "/hr/getAllAssociatedEmployees"
+
+export const getDashboardStatistics = webServiceBaseUrl + "/hr/getDashboardStatistics"
+

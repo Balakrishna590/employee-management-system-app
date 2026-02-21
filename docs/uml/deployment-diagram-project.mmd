@@ -1,0 +1,34 @@
+﻿flowchart LR
+  classDef actor fill:#ffffff,stroke:#333,color:#111,stroke-width:1px;
+  classDef node fill:#eef5ff,stroke:#2f5fa7,color:#10233f,stroke-width:1px;
+  classDef artifact fill:#edf8ef,stroke:#2f7a3b,color:#17381e,stroke-width:1px;
+  classDef ext fill:#f7f7f7,stroke:#666,color:#111,stroke-width:1px;
+
+  U["actor End User Browser"]:::actor
+
+  subgraph HOST["Deployment Node App Server VM or Container"]
+    direction TB
+    N["Node.js Runtime"]:::node
+    X["Express Server server.ts Port 4000"]:::node
+    SSR["Angular SSR Engine main.server.ts CommonEngine"]:::node
+    STATIC["Artifact Browser Bundle dist browser"]:::artifact
+  end
+
+  API["External Backend API localhost 8080 api"]:::ext
+
+  U -->|HTTP HTTPS| X
+  X --> SSR
+  X -->|Static Files| STATIC
+  X -->|REST API Calls| API
+  SSR -->|Rendered HTML| U
+  STATIC -->|JS CSS Assets| U
+
+  subgraph CI["Build Release"]
+    direction LR
+    SRC["Source src"]:::node
+    BUILD["Angular Build"]:::node
+    DIST["Artifact dist employee-management-system-app"]:::artifact
+    SRC --> BUILD --> DIST
+  end
+
+  DIST --> STATIC

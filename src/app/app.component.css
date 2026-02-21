@@ -1,28 +1,18 @@
 .app-layout {
   display: flex;
   min-height: 100vh;
+  background: #f8fafc;
+}
+
+.app-layout.no-sidebar .app-content {
   width: 100%;
-  background: #f5f7fb;
 }
 
-/* Sidebar component */
-app-sidebar {
-  width: 240px;
-  min-width: 240px;
-  background: #ffffff;
-  border-right: 1px solid #eaecef;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  z-index: 100;
+app-side-bar {
+  flex: 0 0 260px;
 }
 
-/* Right side content (TeamDetails etc...) */
 .app-content {
-  margin-left: 30px;     /* SAME AS SIDEBAR WIDTH */
-  width: calc(100% - 240px);
-  padding: 0;
+  flex: 1;
   min-height: 100vh;
-  overflow-x: hidden;
 }

@@ -1,0 +1,11 @@
+<section class="card">
+  <h3>{{ title }}</h3>
+
+  <div class="question" *ngFor="let item of questions">
+    <p>{{ item.question }}</p>
+    <div class="bar-track">
+      <div class="bar-fill" [style.width.%]="item.participation"></div>
+    </div>
+    <span>{{ item.participation }}% participated</span>
+  </div>
+</section>

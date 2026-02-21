@@ -1,0 +1,48 @@
+﻿sequenceDiagram
+    autonumber
+    actor User
+    participant UI as LoginComponent
+    participant AuthDS as AuthDataService
+    participant API as Auth API (/auth/login)
+    participant Sess as SessionService
+    participant Store as localStorage
+    participant Router as Angular Router
+    participant AG as AuthGuard
+    participant RG as RoleGuard
+    participant Dash as Role Dashboard
+
+    User->>UI: Enter username/password and click Login
+    UI->>UI: Validate form
+
+    alt Form invalid
+      UI-->>User: Show validation errors
+    else Form valid
+      UI->>AuthDS: userSecurityLogin(payload)
+      AuthDS->>API: POST /auth/login
+      API-->>AuthDS: { token, roles }
+      AuthDS-->>UI: Login response
+
+      alt Login failed
+        UI-->>User: Invalid username or password
+      else Login successful
+        UI->>Store: setItem("token", token)
+        UI->>Sess: roles = response.roles
+
+        alt Role contains ADMIN
+          UI->>Router: navigate('/admin')
+        else Role contains HR
+          UI->>Router: navigate('/hr')
+        else Role contains MANAGER
+          UI->>Router: navigate('/manager')
+        else Role contains EMPLOYEE
+          UI->>Router: navigate('/employee')
+        end
+
+        Router->>AG: canActivate()
+        AG-->>Router: isLoggedIn?
+        Router->>RG: canActivate(route.data.roles)
+        RG-->>Router: role allowed?
+        Router->>Dash: Load matching dashboard component
+        Dash-->>User: Dashboard displayed
+      end
+    end

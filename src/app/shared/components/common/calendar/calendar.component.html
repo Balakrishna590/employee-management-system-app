@@ -1,0 +1,12 @@
+<section class="card">
+  <h3>{{ title }}</h3>
+  <ul>
+    <li *ngFor="let event of events">
+      <div>
+        <strong>{{ event.title }}</strong>
+        <p>{{ event.date }}</p>
+      </div>
+      <span class="event-type">{{ event.type }}</span>
+    </li>
+  </ul>
+</section>

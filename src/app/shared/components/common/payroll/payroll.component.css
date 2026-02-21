@@ -1,0 +1,38 @@
+.card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.card-head h3 {
+  margin: 0 0 12px;
+  color: #111827;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 14px;
+}
+
+th {
+  color: #6b7280;
+  font-weight: 600;
+}
+
+td span {
+  color: #15803d;
+  font-weight: 600;
+}
+
+td span.pending {
+  color: #b45309;
+}

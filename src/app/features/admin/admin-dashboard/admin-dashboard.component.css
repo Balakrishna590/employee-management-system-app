@@ -1,0 +1,98 @@
+.dashboard {
+  padding: 24px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+h2 {
+  margin: 0;
+}
+
+.add-btn {
+  border: none;
+  border-radius: 8px;
+  background: #0ea5e9;
+  color: #fff;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+th {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.action-cell {
+  position: relative;
+}
+
+.dots-btn {
+  border: none;
+  background: #f1f5f9;
+  border-radius: 6px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.tooltip-menu {
+  position: absolute;
+  right: 10px;
+  top: 38px;
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.12);
+  min-width: 130px;
+  z-index: 10;
+}
+
+.tooltip-menu button {
+  width: 100%;
+  border: none;
+  background: transparent;
+  text-align: left;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.tooltip-menu button:hover {
+  background: #f8fafc;
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+.two-col {
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+}
+
+.mt {
+  margin-top: 16px;
+}

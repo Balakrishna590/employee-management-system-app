@@ -1,13 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
+<div class="dashboard">
+  <section class="card">
+    <div class="header-row">
+      <h2>All Employees</h2>
+      <button type="button" class="add-btn">+ Add Employee</button>
+    </div>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Manager DashBoard</title>
-</head>
+    <table>
+      <thead>
+        <tr>
+          <th>Employee ID</th>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees">
+          <td>{{ employee.id }}</td>
+          <td>{{ employee.name }}</td>
+          <td>{{ employee.department }}</td>
+          <td>{{ employee.role }}</td>
+          <td class="action-cell">
+            <button type="button" class="dots-btn" (click)="toggleMenu(employee.id)">&#8942;</button>
+            <div class="tooltip-menu" *ngIf="activeMenuEmployeeId === employee.id">
+              <button type="button" (click)="editEmployee(employee.id)">Edit Employee</button>
+              <button type="button" (click)="deleteEmployee(employee.id)">Delete Employee</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
 
-<body>
-    <manager-team-details></manager-team-details>
-</body>
+  <section class="grid two-col mt">
+    <app-calendar-shared title="Admin Calendar"></app-calendar-shared>
+    <app-payroll-shared title="My Payroll"></app-payroll-shared>
+  </section>
 
-</html>
+  <section class="mt">
+    <app-survey-shared title="Admin Survey"></app-survey-shared>
+  </section>
+</div>

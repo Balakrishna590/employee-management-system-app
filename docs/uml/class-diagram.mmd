@@ -1,0 +1,77 @@
+﻿classDiagram
+    class AppComponent {
+      +showSidebar() boolean
+    }
+
+    class SideBarComponent {
+      -sessionService: SessionService
+      -authService: AuthService
+      +sections: MenuSection[]
+      +ngOnInit() void
+      +toggle(item: MenuItem) void
+    }
+
+    class LoginComponent {
+      -authDataService: AuthDataService
+      -sessionService: SessionService
+      +loginForm
+      +submit() void
+    }
+
+    class AuthService {
+      -TOKEN_KEY: string
+      +login(credentials) Observable
+      +getRoles() string[]
+      +isLoggedIn() boolean
+      +logout() void
+    }
+
+    class AuthGuard {
+      -auth: AuthService
+      +canActivate() boolean
+    }
+
+    class RoleGuard {
+      -auth: AuthService
+      +canActivate(route) boolean
+    }
+
+    class HttpService {
+      +addRequestHttpHeader() HttpHeaders
+      +addRequestHttpParams(params) HttpParams
+      +handleResponse(res) any
+      +handleError(error) Observable
+    }
+
+    class AuthDataService {
+      +userSecurityLogin(req) Observable
+    }
+
+    class ManagerDataService {
+      +getAllManagerEmployees(managerId) Observable
+    }
+
+    class SessionService {
+      -_roles: string[]
+      +roles: string[]
+    }
+
+    class JwtInterceptor {
+      +intercept(req,next) Observable
+    }
+
+    class MenuSection
+    class MenuItem
+
+    AppComponent --> AuthService
+    AppComponent --> SideBarComponent
+    LoginComponent --> AuthDataService
+    LoginComponent --> SessionService
+    SideBarComponent --> SessionService
+    SideBarComponent --> AuthService
+    SideBarComponent --> MenuSection
+    SideBarComponent --> MenuItem
+    AuthGuard --> AuthService
+    RoleGuard --> AuthService
+    AuthDataService --|> HttpService
+    ManagerDataService --|> HttpService
