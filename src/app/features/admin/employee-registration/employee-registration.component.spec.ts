@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 
-import { AdminDashboardComponent } from './admin-dashboard.component';
+import { EmployeeRegistrationComponent } from './employee-registration.component';
 
-describe('AdminDashboardComponentComponent', () => {
-  let component: AdminDashboardComponent;
-  let fixture: ComponentFixture<AdminDashboardComponent>;
+describe('EmployeeRegistrationComponent', () => {
+  let component: EmployeeRegistrationComponent;
+  let fixture: ComponentFixture<EmployeeRegistrationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AdminDashboardComponent],
+      imports: [EmployeeRegistrationComponent],
       providers: [provideRouter([])]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AdminDashboardComponent);
+    fixture = TestBed.createComponent(EmployeeRegistrationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

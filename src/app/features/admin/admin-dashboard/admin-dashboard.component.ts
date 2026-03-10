@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CalendarComponent } from '../../../shared/components/common/calendar/calendar.component';
 import { PayrollComponent } from '../../../shared/components/common/payroll/payroll.component';
 import { SurveyComponent } from '../../../shared/components/common/survey/survey.component';
@@ -21,6 +22,12 @@ export class AdminDashboardComponent {
     { id: 'EMP-1041', name: 'Noah Kim', department: 'Finance', role: 'Employee' },
     { id: 'EMP-1058', name: 'Isabella Cook', department: 'Operations', role: 'Employee' }
   ];
+
+  constructor(private router: Router) {}
+
+  openEmployeeRegistration(): void {
+    this.router.navigate(['/admin/employee-registration']);
+  }
 
   toggleMenu(employeeId: string): void {
     this.activeMenuEmployeeId = this.activeMenuEmployeeId === employeeId ? null : employeeId;

@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { EmployeeRegistrationComponent } from './employee-registration/employee-registration.component';
 import { CalendarComponent } from '../../shared/components/common/calendar/calendar.component';
 import { PayrollComponent } from '../../shared/components/common/payroll/payroll.component';
 import { SurveyComponent } from '../../shared/components/common/survey/survey.component';
@@ -13,6 +14,10 @@ export const ADMIN_ROUTES: Routes = [
   {
     path: 'employees',
     component: AdminDashboardComponent
+  },
+  {
+    path: 'employee-registration',
+    component: EmployeeRegistrationComponent
   },
   {
     path: 'employee-management',

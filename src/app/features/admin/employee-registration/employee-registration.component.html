@@ -1,0 +1,121 @@
+<div class="registration-page">
+  <section class="registration-card">
+    <div class="top-bar">
+      <h2>EMPLOYEE DATA</h2>
+      <div class="tabs">
+        <button type="button" [class.active]="activeTab === 'personal'" (click)="setTab('personal')">Personal</button>
+        <button type="button" [class.active]="activeTab === 'work'" (click)="setTab('work')">Work</button>
+        <button type="button" [class.active]="activeTab === 'attendance'" (click)="setTab('attendance')">Attendance</button>
+      </div>
+    </div>
+
+    <form [formGroup]="registrationForm" (ngSubmit)="save()">
+      <ng-container *ngIf="activeTab === 'personal'">
+        <h3>General Information</h3>
+
+        <div class="address-inline-grid">
+          <label><span class="required">*</span> First Name :</label>
+          <input type="text" formControlName="firstName" placeholder="First Name" />
+
+          <label><span class="required">*</span> Last Name :</label>
+          <input type="text" formControlName="lastName" placeholder="Last Name" />
+
+          <label><span class="required">*</span> Email</label>
+          <input type="email" formControlName="email" placeholder="Email" />
+
+          <label><span class="required">*</span> Password</label>
+          <input type="password" formControlName="password" placeholder="Password" />
+
+          <label><span class="required">*</span> Date of Birth</label>
+          <input type="date" formControlName="dateOfBirth" />
+
+          <label><span class="required">*</span> Gender</label>
+          <select formControlName="gender">
+            <option value="" disabled>Select gender</option>
+            <option *ngFor="let gender of genders" [value]="gender">{{ gender }}</option>
+          </select>
+
+          <label><span class="required">*</span> Nationality</label>
+          <input type="text" formControlName="nationality" placeholder="Select Nationality" />
+
+          <label><span class="required">*</span> Phone</label>
+          <input type="tel" formControlName="phone" placeholder="Phone" />
+        </div>
+
+        <h3 class="address-title">Address</h3>
+
+        <div class="address-inline-grid">
+          <label>Address 1</label>
+          <input type="text" formControlName="address1" placeholder="Address 1" />
+
+          <label>Address2</label>
+          <input type="text" formControlName="address2" placeholder="Address2" />
+        </div>
+
+        <div class="address-inline-grid">
+          <label>City</label>
+          <input type="text" formControlName="city" placeholder="City" />
+
+          <label>State</label>
+          <input type="text" formControlName="state" placeholder="State" />
+
+          <label>Country</label>
+          <select formControlName="country">
+            <option value="" disabled>Select Country</option>
+            <option value="India">India</option>
+            <option value="United States">United States</option>
+            <option value="United Kingdom">United Kingdom</option>
+            <option value="Canada">Canada</option>
+            <option value="Australia">Australia</option>
+          </select>
+
+          <label>Zip</label>
+          <input type="text" formControlName="zip" placeholder="Zip" />
+        </div>
+
+        <div class="work-actions">
+          <button type="submit" class="save-btn">Save</button>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="activeTab === 'work'">
+        <div class="work-grid">
+          <label>Manager</label>
+          <select formControlName="manager">
+            <option value="" disabled>Manager Name</option>
+            <option *ngFor="let manager of managers" [value]="manager">{{ manager }}</option>
+          </select>
+
+          <label><span class="required">*</span> E-mail :</label>
+          <input type="email" formControlName="workEmail" placeholder="Work Email" />
+
+          <label>Time-Off Manager</label>
+          <select formControlName="timeOffManager">
+            <option value="" disabled>Manager Name</option>
+            <option *ngFor="let manager of managers" [value]="manager">{{ manager }}</option>
+          </select>
+
+          <label>Role</label>
+          <select formControlName="role">
+            <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+          </select>
+
+          <label>Office</label>
+          <select formControlName="office">
+            <option *ngFor="let office of offices" [value]="office">{{ office }}</option>
+          </select>
+
+          <label>Department</label>
+          <select formControlName="department">
+            <option value="" disabled>Select Department</option>
+            <option *ngFor="let department of departments" [value]="department">{{ department }}</option>
+          </select>
+        </div>
+
+        <div class="work-actions">
+          <button type="submit" class="save-btn">Save</button>
+        </div>
+      </ng-container>
+    </form>
+  </section>
+</div>
